@@ -44,7 +44,7 @@ export class AuthService {
     }
   }
 
-  async login(loginAuthDTO: LoginAuthDTO) {
+  async login(loginAuthDTO: LoginAuthDTO): Promise<AuthEntity> {
     const user = await this.prisma.user.findUnique({
       where: {
         username: loginAuthDTO.username,
