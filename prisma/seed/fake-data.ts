@@ -1,22 +1,23 @@
-import type { Prisma } from '@prisma/client';
 import { faker } from '@faker-js/faker';
+import * as argon from 'argon2';
 
-export function fakeUser(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  overrides?: Partial<Omit<Prisma.UserUncheckedCreateInput, ''>>,
-) {
+export async function fakeUser() {
   return {
     username: faker.internet.userName(),
     name: faker.person.firstName(),
-    password: faker.internet.password(),
-    ...overrides,
+    password: await argon.hash(faker.internet.password()),
   };
 }
 
-export function fakePerusahaan(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  overrides?: Partial<Omit<Prisma.PerusahaanUncheckedCreateInput, ''>>,
-) {
+export function fakeUserArray() {
+  const users = [];
+  for (let i = 0; i < 7; i++) {
+    users.push(fakeUser());
+  }
+  return users;
+}
+
+export function fakePerusahaan() {
   return {
     nama: faker.person.fullName(),
     alamat: faker.location.streetAddress(),
@@ -25,14 +26,21 @@ export function fakePerusahaan(
       length: 3,
       casing: 'upper',
     }),
-    ...overrides,
   };
 }
 
-export function fakeBarang(
+export function fakePerusahaanArray(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  overrides?: Partial<Omit<Prisma.BarangUncheckedCreateInput, ''>>,
+  total: number,
 ) {
+  const perusahaan = [];
+  for (let i = 0; i < total; i++) {
+    perusahaan.push(fakePerusahaan());
+  }
+  return perusahaan;
+}
+
+export function fakeBarang() {
   return {
     nama: faker.commerce.productName(),
     harga: faker.number.int({
@@ -47,6 +55,5 @@ export function fakeBarang(
       length: 5,
       casing: 'upper',
     }),
-    ...overrides,
   };
 }

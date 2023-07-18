@@ -1,70 +1,51 @@
-import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { UniqueEnforcer } from 'enforce-unique';
-import * as argon from 'argon2';
+import { PrismaClient } from '@prisma/client';
+import { fakePerusahaanArray, fakeUser } from './fake-data';
 
 const prisma: PrismaClient = new PrismaClient();
-const uniqueEnforcer = new UniqueEnforcer();
+
 const seed = async () => {
-  /* Generate 10 Perusahaan */
-  for (let i = 0; i < 10; i++) {
-    const perusahaan = await prisma.perusahaan.create({
-      data: {
-        nama: faker.person.fullName(),
-        alamat: faker.location.streetAddress(),
-        no_telp: faker.phone.number(),
-        kode: faker.string.alpha({
-          length: 3,
-          casing: 'upper',
-        }),
-      },
+  /**
+   * Create 7 user
+   */
+  for (let i = 0; i < 7; i++) {
+    const user = await fakeUser();
+    await prisma.user.create({
+      data: user,
     });
+  }
 
-    /* Generate 7 Barang for each Perusahaan */
-    for (let j = 0; j < 7; j++) {
-      const kode = uniqueEnforcer.enforce(
-        () => {
-          return faker.string.alpha({
-            casing: 'upper',
-          });
-        },
-        {
-          maxTime: 1000,
-          maxRetries: 1000,
-        },
-      );
-
+  /**
+   * Create 4 perusahaan with 4 barang each
+   */
+  const perusahaan = fakePerusahaanArray(4);
+  for (let i = 0; i < perusahaan.length; i++) {
+    const data = perusahaan[i];
+    const created = await prisma.perusahaan.create({
+      data,
+    });
+    for (let j = 0; j < 4; j++) {
+      /* Random Harga dan Stokey */
       await prisma.barang.create({
         data: {
-          nama: faker.commerce.productName(),
+          nama: `Barang ${faker.commerce.productName()}`,
           harga: faker.number.int({
-            min: 1,
+            min: 1000,
             max: 1000000,
           }),
           stok: faker.number.int({
             min: 0,
             max: 10000,
           }),
-          kode: kode,
+          kode: `${created.kode}-${j + 1}`,
           perusahaan: {
             connect: {
-              id: perusahaan.id,
+              id: created.id,
             },
           },
         },
       });
     }
-  }
-
-  /* Generate 3 Admin */
-  for (let i = 0; i < 3; i++) {
-    await prisma.user.create({
-      data: {
-        username: faker.internet.userName(),
-        name: faker.person.firstName(),
-        password: await argon.hash(faker.internet.password()),
-      },
-    });
   }
 };
 

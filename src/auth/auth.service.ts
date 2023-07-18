@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import * as argon from 'argon2';
 import { AuthEntity } from './entities';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -73,6 +74,31 @@ export class AuthService {
     };
   }
 
+  async getSelf(req: Request) {
+    const userData = this.extractUserData(req);
+
+    const user = await this.prisma.user.findUnique({
+      where: {
+        username: userData.username,
+      },
+    });
+
+    return {
+      user: {
+        username: user.username,
+        name: user.name,
+      },
+    };
+  }
+
+  private extractUserData(req: Request): { sub: string; username: string } {
+    if ('username' in req.user && 'sub' in req.user) {
+      return {
+        sub: String(req.user.sub),
+        username: String(req.user.username),
+      };
+    }
+  }
   async signToken(userId: string, username: string): Promise<string> {
     const payload = {
       sub: userId,
