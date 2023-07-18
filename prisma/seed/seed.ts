@@ -56,7 +56,6 @@ const seed = async () => {
     }
   }
 
-  faker.seed(123);
   /* Generate 3 Admin */
   for (let i = 0; i < 3; i++) {
     await prisma.user.create({
