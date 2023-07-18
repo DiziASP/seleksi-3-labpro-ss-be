@@ -3,11 +3,11 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { PerusahaanService } from './perusahaan.service';
 import { CreatePerusahaanDto } from './dto/create-perusahaan.dto';
@@ -42,7 +42,7 @@ export class PerusahaanController {
     return this.perusahaanService.getPerusahaanByID(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   @ApiOkResponse({ type: PerusahaanEntity })
   async updatePerusahaan(
     @Param('id') id: string,

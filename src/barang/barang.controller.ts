@@ -3,11 +3,11 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { BarangService } from './barang.service';
 import { CreateBarangDto } from './dto/create-barang.dto';
@@ -45,7 +45,7 @@ export class BarangController {
     return this.barangService.getBarangByID(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   @ApiOkResponse({ type: BarangEntity })
   updateBarang(
     @Param('id') id: string,
