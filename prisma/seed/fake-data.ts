@@ -19,9 +19,9 @@ export function fakeUserArray() {
 
 export function fakePerusahaan() {
   return {
-    nama: faker.person.fullName(),
+    nama: faker.company.name(),
     alamat: faker.location.streetAddress(),
-    no_telp: faker.phone.number(),
+    no_telp: faker.phone.number('021########'),
     kode: faker.string.alpha({
       length: 3,
       casing: 'upper',

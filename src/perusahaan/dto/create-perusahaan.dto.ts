@@ -29,8 +29,8 @@ export class CreatePerusahaanDto {
 
   @ApiProperty({
     type: String,
-    description: 'Alamat Perusahaan',
-    example: 'Jl. ABC No. 123',
+    description: 'Nomor telepon Perusahaan',
+    example: '0217971582',
   })
   @IsNumberString()
   @IsNotEmpty()

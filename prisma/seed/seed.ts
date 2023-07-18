@@ -28,7 +28,7 @@ const seed = async () => {
       /* Random Harga dan Stokey */
       await prisma.barang.create({
         data: {
-          nama: `Barang ${faker.commerce.productName()}`,
+          nama: `${faker.commerce.productName()}`,
           harga: faker.number.int({
             min: 1000,
             max: 1000000,
