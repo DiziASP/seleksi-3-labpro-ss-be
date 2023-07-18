@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { PerusahaanService } from './perusahaan.service';
 import { CreatePerusahaanDto } from './dto/create-perusahaan.dto';
 import { UpdatePerusahaanDto } from './dto/update-perusahaan.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { PerusahaanEntity } from './entities/perusahaan.entity';
+import { AuthGuard } from 'src/auth/guard';
 
 @ApiTags('Perusahaan')
 @Controller('perusahaan')
@@ -21,6 +23,7 @@ export class PerusahaanController {
 
   @Post()
   @ApiCreatedResponse({ type: PerusahaanEntity })
+  @UseGuards(AuthGuard)
   async addPerusahaan(
     @Body() createPerusahaanDto: CreatePerusahaanDto,
   ): Promise<PerusahaanEntity> {
@@ -49,6 +52,7 @@ export class PerusahaanController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard)
   @ApiOkResponse({ type: PerusahaanEntity })
   removePerusahaan(@Param('id') id: string): Promise<PerusahaanEntity> {
     return this.perusahaanService.removePerusahaan(id);

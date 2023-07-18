@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { BarangService } from './barang.service';
 import { CreateBarangDto } from './dto/create-barang.dto';
 import { UpdateBarangDto } from './dto/update-barang.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { BarangEntity } from './entities';
+import { AuthGuard } from 'src/auth/guard';
 
 @ApiTags('Barang')
 @Controller('barang')
@@ -21,6 +23,7 @@ export class BarangController {
 
   @Post()
   @ApiCreatedResponse({ type: BarangEntity })
+  @UseGuards(AuthGuard)
   async createBarang(
     @Body() createBarangDto: CreateBarangDto,
   ): Promise<BarangEntity> {
@@ -53,6 +56,7 @@ export class BarangController {
 
   @Delete(':id')
   @ApiOkResponse({ type: BarangEntity })
+  @UseGuards(AuthGuard)
   deleteBarang(@Param('id') id: string): Promise<BarangEntity> {
     return this.barangService.deleteBarang(id);
   }

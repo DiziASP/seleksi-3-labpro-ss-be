@@ -5,7 +5,7 @@ import { SwaggerInit } from './swagger';
 import { TransformInterceptor } from './interceptors';
 import { HttpExceptionFilter } from './interceptors/error.filters';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const client = process.env.CLIENT_URL || 'http://localhost:3000';
 async function run(): Promise<void> {
   const app = await NestFactory.create(AppModule);
