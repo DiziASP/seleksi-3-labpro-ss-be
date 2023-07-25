@@ -6,7 +6,7 @@ import { TransformInterceptor } from './interceptors';
 import { HttpExceptionFilter } from './interceptors/error.filters';
 
 const port = process.env.PORT || 8080;
-const client = process.env.CLIENT_URL || 'http://localhost:3000';
+const client = process.env.CORS_WHITELIST || 'http://localhost:3000';
 async function run(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
@@ -20,7 +20,7 @@ async function run(): Promise<void> {
       'Origin',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    origin: client,
+    origin: [process.env.CORS_WHITELIST],
   });
 
   app.useGlobalInterceptors(new TransformInterceptor());
