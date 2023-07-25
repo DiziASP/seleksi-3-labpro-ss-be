@@ -20,7 +20,7 @@ async function run(): Promise<void> {
       'Origin',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    origin: [process.env.CORS_WHITELIST],
+    origin: ['https://ohl-fe.vercel.app', 'http://127.0.0.1:8000/'],
   });
 
   app.useGlobalInterceptors(new TransformInterceptor());
