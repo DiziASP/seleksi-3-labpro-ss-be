@@ -34,7 +34,7 @@
   
 **BelanjaBelinji** SS-BE is single service backend for [BelanjaBelinji Monolith](https://github.com/DiziASP/seleksi-3-labpro-monolith). This project is made for the purpose of Seleksi 3 LabPro 2023.  This project is made using NestJS (TypeScript) and PostgreSQL. The reason why i use NestJS is because it implements Object Oriented Approach making it easier to implement **SOLID Principle**.
 
-(Insert Picture Here)
+![Landing](https://github.com/DiziASP/seleksi-3-labpro-ss-be/blob/master/.github/images/landing.png?raw=true)
 <p align="right">
 <sub>(Preview)</sub>
 </p>
@@ -139,7 +139,7 @@
     $ npx prisma studio
     ```
 
-    **(Insert Picture Here)**
+    ![Prisma](https://github.com/DiziASP/seleksi-3-labpro-ss-be/blob/master/.github/images/prisma.png?raw=true)
 
     <p align="right">
     <sub>(Preview)</sub>
@@ -181,7 +181,7 @@ You can also run the application using Docker. Make sure you have Docker install
 
 5. Your docker is up and running. Open the website url `http://localhost:8000/` on your browser.
 
-   **(Insert Picture Here)**
+   ![Docker](https://github.com/DiziASP/seleksi-3-labpro-ss-be/blob/master/.github/images/docker.png?raw=true)
 
 ## Tech Stack
 
