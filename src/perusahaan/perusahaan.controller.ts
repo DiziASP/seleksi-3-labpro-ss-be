@@ -14,7 +14,7 @@ import { CreatePerusahaanDto } from './dto/create-perusahaan.dto';
 import { UpdatePerusahaanDto } from './dto/update-perusahaan.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { PerusahaanEntity } from './entities/perusahaan.entity';
-import { AuthGuard } from 'src/auth/guard';
+import { AuthGuard } from '../auth/guard';
 
 @ApiTags('Perusahaan')
 @Controller('perusahaan')

@@ -1,7 +1,11 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { CreateBarangDto } from './dto/create-barang.dto';
 import { UpdateBarangDto } from './dto/update-barang.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
@@ -120,6 +124,7 @@ export class BarangService {
         } else if (error.code === 'P2025') {
           throw new ForbiddenException('Barang tidak ditemukan');
         }
+        throw new BadRequestException(error.message);
       }
       throw error;
     }

@@ -1,7 +1,11 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { CreatePerusahaanDto } from './dto/create-perusahaan.dto';
 import { UpdatePerusahaanDto } from './dto/update-perusahaan.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
@@ -23,7 +27,7 @@ export class PerusahaanService {
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
-          throw new Error(
+          throw new ForbiddenException(
             `Perusahaan dengan kode ${createPerusahaanDto.kode} sudah ada`,
           );
         }
@@ -95,10 +99,11 @@ export class PerusahaanService {
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
-          throw new Error(
+          throw new ForbiddenException(
             `Perusahaan dengan kode ${updatePerusahaanDto.kode} sudah ada`,
           );
         }
+        throw new BadRequestException(error.message);
       }
       throw error;
     }

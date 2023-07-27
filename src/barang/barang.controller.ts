@@ -14,7 +14,7 @@ import { CreateBarangDto } from './dto/create-barang.dto';
 import { UpdateBarangDto } from './dto/update-barang.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { BarangEntity } from './entities';
-import { AuthGuard } from 'src/auth/guard';
+import { AuthGuard } from '../auth/guard';
 
 @ApiTags('Barang')
 @Controller('barang')
