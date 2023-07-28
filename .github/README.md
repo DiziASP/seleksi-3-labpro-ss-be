@@ -8,6 +8,8 @@
 <h4 align="center">A monolithic full stack website made with <s>Django</s>.</h4>
 <p align="center"><sub > but this is the other backend :D<sub/><p/>
 
+<p align="center"><sub>Raden Dizi Assyafadi Putra - 18221155<sub/><p/>
+
 <p align="center">
     <a href="https://github.com/DiziASP/seleksi-3-labpro-ss-be/commits/master">
       <img src="https://img.shields.io/github/last-commit/DiziASP/seleksi-3-labpro-ss-be.svg?style=flat-square&logo=github&logoColor=white"
@@ -19,6 +21,7 @@
   <a href="#installation">Installation</a> •
   <a href="#docker">Docker</a> •
   <a href="#tech-stack">Tech Stack</a> •
+  <a href="#api-endpoint">API Endpoint</a> •
   <a href="#my-design-patterns">My Design Patterns</a> •
   <a href="#bonus">Bonus</a> •
   <a href="#license">License</a>
@@ -185,9 +188,31 @@ You can also run the application using Docker. Make sure you have Docker install
 
 ## Tech Stack
 
- ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
- ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+ ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white): v10.0.0
+ 
+ ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white): v15.0.0
+ 
+ ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white): v3.8
+
+## API Endpoint
+
+This is the endpoint for the Single Service API:
+
+- POST /register         : Perform Register Request
+- POST /login            : Perform Login Request
+- GET /self              : Get currently logged in User Data
+- GET /barang            : Get all barang or barang with certain parameters
+- GET /barang/:id        : Get barang with certain ID
+- POST /barang           : Create barang  
+- PUT /barang/:id        : Update barang with ID
+- DELETE /barang/:id     : Delete barang with ID
+- GET /perusahaan        : Get all perusahaan or perusahaan with certain parameters
+- GET /perusahaan/:id    : Get perusahaan with certain ID
+- POST /perusahaan       : Create perusahaan  
+- PUT /perusahaan/:id    : Update perusahaan with ID
+- DELETE /perusahaan/:id : Delete perusahaan with ID
+
+More detailed Endpoint is described on the [Swagger](https://seleksi-3-labpro-ss-be.up.railway.app/api)
 
 ## My Design Patterns
 
